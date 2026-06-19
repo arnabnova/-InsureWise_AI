@@ -249,6 +249,35 @@ div[data-testid="stExpander"] summary {{
 
 /* tighten default streamlit spacing */
 div[data-testid="stVerticalBlock"] > div {{ gap: 0.4rem; }}
+
+/* ---------------- FORCE LABEL VISIBILITY (fixes invisible labels on mobile / dark mode) ---------------- */
+label, .stSelectbox label, .stNumberInput label, .stTextInput label,
+div[data-testid="stWidgetLabel"] p,
+div[data-testid="stWidgetLabel"] label {{
+    color: #1A2B3C !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    opacity: 1 !important;
+}}
+
+/* Selectbox / number input text itself */
+.stSelectbox div[data-baseweb="select"] span,
+input[type="number"], input[type="text"] {{
+    color: #1A2B3C !important;
+}}
+
+/* Help tooltip icon visibility */
+div[data-testid="stTooltipIcon"] svg {{
+    color: {PRIMARY} !important;
+}}
+
+@media (max-width: 640px) {{
+    label, div[data-testid="stWidgetLabel"] p, div[data-testid="stWidgetLabel"] label {{
+        font-size: 1rem !important;
+    }}
+    .hero h1 {{ font-size: 1.7rem; }}
+    .hero .tagline {{ font-size: 0.95rem; }}
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -462,7 +491,7 @@ if predict_clicked:
             }
         ))
         fig_gauge.update_layout(height=260, margin=dict(t=20, b=10, l=20, r=20),
-                                 paper_bgcolor="rgba(0,0,0,0)", font={'family': "Poppins"})
+                                 paper_bgcolor="rgba(0,0,0,0)", font={'family': "Poppins", 'color': "#1A2B3C", 'size': 13})
         st.plotly_chart(fig_gauge, use_container_width=True)
 
     # Risk score progress / breakdown bar (now shown only post-prediction)
@@ -480,7 +509,7 @@ if predict_clicked:
             height=260, margin=dict(t=20, b=10, l=10, r=20),
             xaxis=dict(range=[0, 100], title="Risk score"),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            font={'family': "Poppins"}
+            font={'family': "Poppins", 'color': "#1A2B3C", 'size': 13}
         )
         st.plotly_chart(fig_risk, use_container_width=True)
 
@@ -509,7 +538,7 @@ if predict_clicked:
             height=300, margin=dict(t=20, b=10, l=10, r=20),
             xaxis=dict(title="Relative influence"),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            font={'family': "Poppins"}
+            font={'family': "Poppins", 'color': "#1A2B3C", 'size': 13}
         )
         st.plotly_chart(fig_impact, use_container_width=True)
         st.caption("Illustrative weighting based on your entered profile — not the model's internal feature importances.")
@@ -538,7 +567,13 @@ if predict_clicked:
             height=300, margin=dict(t=20, b=10, l=10, r=20),
             yaxis=dict(title="Estimated premium (₹)"),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            font={'family': "Poppins"}
+            font={'family': "Poppins", 'color': "#1A2B3C", 'size': 13}
         )
         st.plotly_chart(fig_compare, use_container_width=True)
 
+# ----------------------------------------------------------------------------
+# FOOTER
+# ----------------------------------------------------------------------------
+st.markdown("""
+<div class="app-footer">Powered by Machine Learning | Developed by Arnab Chatterjee</div>
+""", unsafe_allow_html=True)
