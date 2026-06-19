@@ -266,6 +266,23 @@ input[type="number"], input[type="text"] {{
     color: #1A2B3C !important;
 }}
 
+/* Number input / text input boxes need a light background to match the dark text above */
+div[data-testid="stNumberInput"] input,
+div[data-testid="stTextInput"] input,
+.stNumberInput input,
+.stTextInput input {{
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(21,101,192,0.25) !important;
+    border-radius: 8px !important;
+}}
+
+/* The +/- step buttons on number inputs */
+div[data-testid="stNumberInput"] button {{
+    background-color: #F0F4FA !important;
+    color: #1A2B3C !important;
+    border: 1px solid rgba(21,101,192,0.25) !important;
+}}
+
 /* Help tooltip icon visibility */
 div[data-testid="stTooltipIcon"] svg {{
     color: {PRIMARY} !important;
